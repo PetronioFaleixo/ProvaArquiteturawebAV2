@@ -59,21 +59,42 @@ Este repositório é uma excelente base para aprender e implementar autenticaç�
 
 Web Client: Representa qualquer cliente que interage com a API, como um navegador web ou um aplicativo.
 
-AuthController: Um controlador REST que gerencia as operações de autenticação:
-- /login: Endpoint para autenticar usuários e obter um token JWT.
-- /novoUsuario: Endpoint para registrar um novo usuário.
-- /verificarCadastro/{uuid}: Endpoint para verificar o cadastro de um usuário com base em um UUID.
+### AuthController
+O `AuthController` é um controlador REST responsável por gerenciar as operações de autenticação no sistema. Ele disponibiliza os seguintes endpoints:
 
-AuthService: Responsável pela lógica de autenticação utilizando JWT. Ele gera tokens JWT e valida tokens recebidos.
+- **/login**: Endpoint utilizado para autenticar usuários. Quando um usuário fornece suas credenciais corretas (como nome de usuário e senha), este endpoint gera um token JWT (JSON Web Token) que pode ser utilizado para autenticação subsequente.
+  
+- **/novoUsuario**: Endpoint para registrar um novo usuário no sistema. Este endpoint recebe os dados necessários para criar um novo usuário, como nome, e-mail e senha.
+  
+- **/verificarCadastro/{uuid}**: Endpoint utilizado para verificar o cadastro de um usuário com base em um UUID específico. Esse UUID pode ser gerado durante o processo de registro e usado para confirmar o cadastro do usuário.
 
-UsuarioService: Gerencia as operações relacionadas aos usuários, como inserção de novos usuários e consultas.
+### AuthService
+O `AuthService` é responsável pela lógica de autenticação utilizando JWT. Suas principais funções incluem:
 
-Banco de Dados: Armazena os dados dos usuários e outras informações necessárias para o funcionamento do sistema. As propriedades de conexão são configuradas no arquivo `application.properties`.
+- **Geração de Tokens JWT**: Quando um usuário é autenticado com sucesso através do `/login`, o `AuthService` gera um token JWT contendo informações específicas do usuário e um período de validade.
+  
+- **Validação de Tokens Recebidos**: Quando um usuário tenta acessar recursos protegidos, o `AuthService` valida o token JWT recebido para garantir que seja autêntico e que não tenha expirado.
 
-Funcionamento Geral:
-- O cliente interage com o sistema através dos endpoints fornecidos pelo AuthController.
-- O AuthController utiliza serviços como AuthService e UsuarioService para realizar operações de autenticação e gerenciamento de usuários.
-- As operações são persistidas e consultadas no banco de dados configurado.
+### UsuarioService
+O `UsuarioService` gerencia as operações relacionadas aos usuários no sistema. Suas responsabilidades incluem:
 
-Este diagrama simplificado ilustra as principais partes do sistema e como elas se relacionam para implementar a autenticação segura utilizando JWT em aplicações Java.
+- **Inserção de Novos Usuários**: Recebe os dados de novos usuários vindos do endpoint `/novoUsuario` e os insere no banco de dados para que possam ser autenticados posteriormente.
+  
+- **Consultas de Usuários**: Fornece métodos para consultar informações de usuários armazenadas no banco de dados, essenciais para operações como verificação de cadastro (`/verificarCadastro/{uuid}`).
 
+### Banco de Dados
+O Banco de Dados armazena os dados dos usuários e outras informações necessárias para o funcionamento do sistema. As propriedades de conexão são configuradas no arquivo `application.properties`, que contém informações como URL de conexão, credenciais de acesso e outras configurações específicas do banco de dados utilizado.
+
+### Funcionamento Geral
+O sistema opera da seguinte maneira:
+
+- **Interacão Cliente-Servidor**: O cliente (front-end ou outra aplicação) interage com o sistema exclusivamente através dos endpoints fornecidos pelo `AuthController`.
+  
+- **Utilização de Serviços**: O `AuthController` utiliza serviços como `AuthService` e `UsuarioService` para executar operações relacionadas à autenticação de usuários e gerenciamento de dados de usuários.
+  
+- **Persistência de Dados**: Todas as operações relacionadas a usuários, como autenticação, registro de novos usuários e verificação de cadastro, são persistidas e consultadas no banco de dados configurado, garantindo a integridade e segurança dos dados do sistema.
+
+Esse diagrama simplificado fornece uma visão geral das principais partes do sistema e como elas se inter-relacionam para implementar um sistema de autenticação seguro utilizando JWT em aplicações Java.
+
+
+Fim
