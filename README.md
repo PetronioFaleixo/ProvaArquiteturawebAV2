@@ -47,3 +47,61 @@ Este projeto está licenciado sob a [MIT License](https://opensource.org/license
 ---
 
 Este repositório é uma excelente base para aprender e implementar autenticação segura em aplicações Java utilizando JWT.
+
+
+# Diagrama de Componentes
+
++-------------------------------------------+
+|                Web Client                  |
++-------------------------------------------+
+                  |
+                  v
++-------------------------------------------+
+|               AuthController               |
+|  - /login                                  |
+|  - /novoUsuario                            |
+|  - /verificarCadastro/{uuid}               |
++-------------------------------------------+
+                  |
+                  v
++-------------------------------------------+
+|                  AuthService               |
+|  - Geração e validação de tokens JWT       |
++-------------------------------------------+
+                  |
+                  v
++-------------------------------------------+
+|                UsuarioService              |
+|  - Gerenciamento de usuários               |
+|  - Inserção e consulta de usuários         |
++-------------------------------------------+
+                  |
+                  v
++-------------------------------------------+
+|               Banco de Dados               |
+|  - Propriedades configuradas em            |
+|    application.properties                 |
++-------------------------------------------+
+
+# Diagrama de Componentes e Funcionamento Geral
+
+Web Client: Representa qualquer cliente que interage com a API, como um navegador web ou um aplicativo.
+
+AuthController: Um controlador REST que gerencia as operações de autenticação:
+- /login: Endpoint para autenticar usuários e obter um token JWT.
+- /novoUsuario: Endpoint para registrar um novo usuário.
+- /verificarCadastro/{uuid}: Endpoint para verificar o cadastro de um usuário com base em um UUID.
+
+AuthService: Responsável pela lógica de autenticação utilizando JWT. Ele gera tokens JWT e valida tokens recebidos.
+
+UsuarioService: Gerencia as operações relacionadas aos usuários, como inserção de novos usuários e consultas.
+
+Banco de Dados: Armazena os dados dos usuários e outras informações necessárias para o funcionamento do sistema. As propriedades de conexão são configuradas no arquivo `application.properties`.
+
+Funcionamento Geral:
+- O cliente interage com o sistema através dos endpoints fornecidos pelo AuthController.
+- O AuthController utiliza serviços como AuthService e UsuarioService para realizar operações de autenticação e gerenciamento de usuários.
+- As operações são persistidas e consultadas no banco de dados configurado.
+
+Este diagrama simplificado ilustra as principais partes do sistema e como elas se relacionam para implementar a autenticação segura utilizando JWT em aplicações Java.
+
