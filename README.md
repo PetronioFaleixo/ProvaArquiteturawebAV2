@@ -52,36 +52,8 @@ Este repositório é uma excelente base para aprender e implementar autenticaç�
 # Diagrama de Componentes
 
 +-------------------------------------------+
-|                Web Client                  |
-+-------------------------------------------+
-                  |
-                  v
-+-------------------------------------------+
-|               AuthController               |
-|  - /login                                  |
-|  - /novoUsuario                            |
-|  - /verificarCadastro/{uuid}               |
-+-------------------------------------------+
-                  |
-                  v
-+-------------------------------------------+
-|                  AuthService               |
-|  - Geração e validação de tokens JWT       |
-+-------------------------------------------+
-                  |
-                  v
-+-------------------------------------------+
-|                UsuarioService              |
-|  - Gerenciamento de usuários               |
-|  - Inserção e consulta de usuários         |
-+-------------------------------------------+
-                  |
-                  v
-+-------------------------------------------+
-|               Banco de Dados               |
-|  - Propriedades configuradas em            |
-|    application.properties                 |
-+-------------------------------------------+
+![image](https://github.com/PetronioFaleixo/ProvaArquiteturawebAV2/assets/79844325/6edc0ab0-5c7d-4495-b4bf-7d8fa4476ea3)
+
 
 # Diagrama de Componentes e Funcionamento Geral
 
